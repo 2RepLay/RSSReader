@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:id="@+id/card"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some Text"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/item_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some Text"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some Text"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/item_link_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some Text"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_publication_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:text="Some Text"/>
+
+        <TextView
+            android:id="@+id/item_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:text="Some Text"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+
