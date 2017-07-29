@@ -1,5 +1,6 @@
 package com.nikitayankov.rx;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -9,14 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nikitayankov.rx.Retrofit.Channel;
 import com.nikitayankov.rx.Retrofit.Feed;
@@ -37,9 +36,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
+// TODO: 29.07.2017 Add ability to save an article in SQLite and query it in "Saved" page
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-//    private static final String TAG = MainActivity.class.getSimpleName();
-
     @BindView(R.id.list_items)
     RecyclerView mRecyclerView;
 
@@ -192,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             holder.mLinkAuthor.setText(feedItem.getAuthorString());
             holder.mPublicationDate.setText(prepareDate(feedItem.getDateString()));
             holder.mCategory.setText(feedItem.getCategoryString());
+
+            holder.mLinkString = feedItem.getLinkString();
         }
 
         @Override
@@ -235,11 +235,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @BindView(R.id.item_category)
             TextView mCategory;
 
+            String mLinkString;
 
             // TODO: 29.07.2017 - Open a new activity with WebView. Store id / link in database and mark as read;
             @OnClick(R.id.card)
             void open(View view) {
-                Toast.makeText(view.getContext(), "Toasted", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent (MainActivity.this, ArticleActivity.class);
+                intent.putExtra("link", mLinkString);
+
+                startActivity(intent);
             }
 
             ChannelViewHolder(View itemView) {

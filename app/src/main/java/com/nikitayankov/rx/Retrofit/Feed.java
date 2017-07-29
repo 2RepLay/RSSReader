@@ -7,7 +7,6 @@ import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
 
-
 @Root(strict = false)
 @NamespaceList({
         @Namespace(reference = "http://purl.org/dc/elements/1.1/", prefix = "dc"),
