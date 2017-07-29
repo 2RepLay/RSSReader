@@ -8,4 +8,6 @@
     <string name="articles">Articles</string>
     <string name="all">All</string>
     <string name="hearthstone">Hearthstone</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
 </resources>

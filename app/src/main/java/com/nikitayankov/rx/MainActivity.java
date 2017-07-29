@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nikitayankov.rx.Retrofit.Channel;
 import com.nikitayankov.rx.Retrofit.Feed;
@@ -30,6 +32,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Callback<Feed> mDefaultCallback;
     RssAdapter mRssAdapter;
 
+    ActionBarDrawerToggle mDrawerToggle;
+
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
 
         mToolbar.setTitle("Retrofit 2 RSS");
+        setSupportActionBar(mToolbar);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,  R.string.drawer_open, R.string.drawer_close) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mChannelAdapter = new ChannelAdapter(mFeedItems);
         mLinearLayoutManager = new LinearLayoutManager(this);
@@ -88,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull Throwable t) {
-
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -192,6 +210,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             holder.mCategory.setText(feedItem.getCategoryString());
 
             holder.mLinkString = feedItem.getLinkString();
+            holder.mTitleString = prepareTitle(feedItem.getTitleString());
+            holder.mCategoryString = feedItem.getCategoryString();
         }
 
         @Override
@@ -236,12 +256,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TextView mCategory;
 
             String mLinkString;
+            String mTitleString;
+            String mCategoryString;
 
             // TODO: 29.07.2017 - Open a new activity with WebView. Store id / link in database and mark as read;
             @OnClick(R.id.card)
-            void open(View view) {
-                Intent intent = new Intent (MainActivity.this, ArticleActivity.class);
+            void open() {
+                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
                 intent.putExtra("link", mLinkString);
+                intent.putExtra("title", mTitleString);
+                intent.putExtra("category", mCategoryString);
 
                 startActivity(intent);
             }
@@ -252,5 +276,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ButterKnife.bind(this, itemView);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mDrawerToggle.syncState();
     }
 }
