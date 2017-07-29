@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/menu_global_group" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/menu_all"
+            android:title="@string/all"/>
+        <item
+            android:id="@+id/menu_articles"
+            android:title="@string/articles"/>
+    </group>
+
+    <group android:id="@+id/menu_categories_group" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/menu_cybersport"
+            android:title="@string/cybersport"/>
+    </group>
+
+    <group android:id="@+id/menu_games_group" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/menu_dota2"
+            android:title="@string/dota_2"/>
+        <item
+            android:id="@+id/menu_hearthstone"
+            android:title="@string/hearthstone"/>
+
+        <item
+            android:id="@+id/menu_starcraft2"
+            android:title="@string/starcraft_2"/>
+        <item
+            android:id="@+id/menu_league_of_legends"
+            android:title="@string/league_of_legends"/>
+        <item
+            android:id="@+id/menu_the_witcher_3"
+            android:title="@string/the_witcher_3"/>
+    </group>
+</menu>

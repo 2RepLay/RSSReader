@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">RX</string>
+    <string name="dota_2">Dota 2</string>
+    <string name="starcraft_2">StarCraft 2</string>
+    <string name="league_of_legends">League of Legends</string>
+    <string name="the_witcher_3">The Witcher 3</string>
+    <string name="cybersport">Cybersport</string>
+    <string name="articles">Articles</string>
+    <string name="all">All</string>
+    <string name="hearthstone">Hearthstone</string>
 </resources>
